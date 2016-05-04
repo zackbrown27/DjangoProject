@@ -47,23 +47,83 @@ def loginProcess(request):
                         'heading': 'Welcome to A Grade Book.',
                         'title': 'A Grade Book',
                     }
-                    return render(request, 'grades/index.html', context)
+                    return render(request, 'contacts/index.html', context)
                 else:
                     errors.append('This account has been disabled.')
             else:
                 errors.append('Invalid username or password.')
 
         context['errors'] = errors
-        return render(request, 'grades/login.html', context)
+        return render(request, 'contacts/login.html', context)
     else:
         login(request)
 def viewContacts(request):
 
-    contacts = Contact.objects.all()
+    cont = Contact.objects.all()
     context = {'title': 'List of all Contacts',
                 'heading': "List of all Contacts",
-                'contacts_list': contacts,
+                'contacts_list': cont,
                }
     return render(request, 'contacts/contacts.html', context)
 
+def saveContact(request, contact_id=None):
+    errors = []
+    if request.method == 'POST':
+        # handle data posted from the from
+        if not request.POST.get('first_name', ''):
+            errors.append('Enter first name.')
+        if not request.POST.get('last_name'):
+            errors.append('Enter last name.')
+        if not request.POST.get('phone', ''):
+            errors.append('Enter Phone')
+        if not request.POST.get('email', ''):
+            errors.append('Enter Email')
 
+        data = {'heading': 'Thank You!',
+                'content': 'Your data has been saved!',
+                'errors': errors,
+            }
+        if errors:
+            data['heading'] = 'Add New Contact'
+            data['content'] = 'Fill in the following information:'
+            return render(request, 'contacts/edit_contact.html', data)
+        else:
+            if contact_id:
+                contact = Contact.objects.get(pk=contact_id)
+            else:
+                contact = Contact()
+            contact.first_name = request.POST.get('first_name')
+            contact.last_name = request.POST.get('last_name')
+            contact.test1 = request.POST.get('phone')
+            contact.test2 = request.POST.get('email')
+            contact.save()
+            data['heading'] = 'Success'
+            data['content'] = 'Contact edited successfully!'
+            data['contact'] = contact
+            return render(request, 'contacts/edit_contact.html', data)
+    else:
+        if not contact_id:
+            # must be a get method to enter new grade info so render the form for user to enter
+            # data
+            data = {
+                'heading': 'Add New Contact',
+                'content': 'Fill in the following information',
+                'errors': errors,
+            }
+        else:
+            # edit existing student
+            student = Contact.objects.get(pk=contact_id)
+            #student = get_object_or_404(Contact, pk=contact_id)
+            data = {
+                'heading': 'Edit Contact',
+                'content': 'Update the following information',
+                'errors': errors,
+                'contact':contact,
+            }
+
+        return render(request, 'contacts/edit_contact.html', data)
+
+def deleteContact(request, contact_id):
+    contact = Contact.objects.get(pk=contact_id)
+    contact.delete()
+    return viewContacts(request, "/contacts/contacts.html")

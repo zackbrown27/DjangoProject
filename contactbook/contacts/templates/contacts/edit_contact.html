@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+{% include 'contacts/header.html' %}
+    <body>
+        <div id="main" style="height:300px;">
+            <h1>{{ heading }}</h1>
+            <p> {{ content }} </p>
+            {% if errors %}
+                <ul>
+                    {% for error in errors %}
+                        <li style="color:red;">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form role="form" action="{% url 'contact' contact.id %}" method="post" novalidate>
+                {% csrf_token %}
+                <label>First Name: *</label>
+                <input id="first_name" type="text" name="first_name" value="{{ contact.first_name }}" ><br />
+                <label>Last Name: *</label>
+                <input id="last_name" type="text" name="last_name" value="{{ contact.last_name }}" ><br />
+                <label>Test 1: *</label>
+                <input id="phone" type="text" name="phone" value="{{ contact.phone }}" required><br />
+                <label>Test 2: *</label>
+                <input id="email" type="text" name="email" value="{{ contact.email }}" required><br />
+                <div>
+                    <button type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    </html>
+{% include 'contacts/footer.html' %}

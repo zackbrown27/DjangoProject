@@ -1,9 +1,11 @@
 {% load humanize %}
-
 {% include 'contacts/header.html' %}
-
-<div id="main" style="height:300px;">
-    <h1>{{ heading }}</h1>
+<header class="intro">
+    <section class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>{{heading}}</h2>
+                <p><div id="main" style="height:200px;">
     {% if content %}
         <p> {{ content }} </p>
     {% endif %}
@@ -30,5 +32,10 @@
     {% else %}
         <p><strong>No contacts are available.</strong></p>
     {% endif %}
-</div>
+    
+</div></p>
+            </div>
+        </div>
+    </section>
+</header>
 {% include 'contacts/footer.html' %}
