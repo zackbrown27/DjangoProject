@@ -1,0 +1,34 @@
+{% load humanize %}
+
+{% include 'contacts/header.html' %}
+
+<div id="main" style="height:300px;">
+    <h1>{{ heading }}</h1>
+    {% if content %}
+        <p> {{ content }} </p>
+    {% endif %}
+    {% if contacts_list %}
+        <table style="width:95%">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th colspan="2">Tools</th>
+            </tr>
+            {% for contact in contacts_list %}
+                <tr>
+                    <td>{{ contact.first_name  }}</td>
+                    <td>{{ contact.last_name }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td><a href="{% url 'contact' contact.id %}">Edit</a></td>
+                    <td><a href="{% url 'delete' contact.id %}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p><strong>No contacts are available.</strong></p>
+    {% endif %}
+</div>
+{% include 'contacts/footer.html' %}
