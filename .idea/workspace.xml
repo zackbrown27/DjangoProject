@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be1431b3-ee00-48a9-9da9-bdfe2000273f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/contactbook/contacts/templates/contacts/addgrade.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contactbook/db.sqlite3" afterPath="$PROJECT_DIR$/contactbook/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contactbook/contacts/templates/contacts/header.html" afterPath="$PROJECT_DIR$/contactbook/contacts/templates/contacts/header.html" />
-    </list>
+    <list default="true" id="be1431b3-ee00-48a9-9da9-bdfe2000273f" name="Default" comment="" />
     <ignored path="PythonFinal.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -59,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/header.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="183">
@@ -72,14 +67,14 @@
       <file leaf-file-name="addgrade.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/addgrade.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+            <state relative-caret-position="170">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit_contact.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="edit_contact.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/edit_contact.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-49">
@@ -1000,14 +995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/edit_contact.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-49">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/contacts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1016,18 +1003,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/addgrade.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="42" column="65" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/addgrade.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contactbook/contacts/templates/contacts/edit_contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
