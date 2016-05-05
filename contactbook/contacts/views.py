@@ -118,7 +118,7 @@ def saveContact(request, contact_id=None):
                 'heading': 'Edit Contact',
                 'content': 'Update the following information',
                 'errors': errors,
-                'contact':contact,
+                'contact': contact,
             }
 
         return render(request, 'contacts/edit_contact.html', data)
@@ -127,3 +127,10 @@ def deleteContact(request, contact_id):
     contact = Contact.objects.get(pk=contact_id)
     contact.delete()
     return viewContacts(request, "/contacts/contacts.html")
+def contactUs(request):
+    context = {
+        'heading': 'Address Book Contact Page',
+        'content': 'Ben Skogen- Phone Number: 555-555-5555',
+        'content2':  'Zack Brown- Phone Number: 999-999-9999'
+    }
+    return render(request, 'contacts/contactus.html', context)
