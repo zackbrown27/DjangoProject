@@ -20,7 +20,7 @@ def about(request):
         'content' 'Address Book is a collaborative django-based web server \n allowing users to manage their contacts in an all-inclusive and easy to use package.'
     }
     return render(request, 'contacts/about.html', context)
-def login(request):
+def login_view(request):
     context = {
         'heading': 'Login',
         'title': 'Login',
@@ -44,8 +44,9 @@ def loginProcess(request):
                 if user.is_active:
                     login(request, user)
                     context = {
-                        'heading': 'Welcome to A Grade Book.',
-                        'title': 'A Grade Book',
+                        'heading': 'Address Book',
+                        'title': 'An all-in-one address book manager',
+                        'content': 'Created by Zack Brown & Ben Skogen.',
                     }
                     return render(request, 'contacts/index.html', context)
                 else:
@@ -134,3 +135,11 @@ def contactUs(request):
         'content2':  'Zack Brown- Phone Number: 999-999-9999'
     }
     return render(request, 'contacts/contactus.html', context)
+def logout_view(request):
+    logout(request)
+    context = {
+        'heading': 'Goodbye!',
+        'content': '<a class="colorTag" href="/login/">Log back in again</a>',
+        'title': 'Logout Successful!'
+    }
+    return render(request, 'contacts/index.html', context)

@@ -2914,7 +2914,7 @@ select[multiple].input-lg {
   margin-bottom: 10px;
   color: #737373;
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -2990,6 +2990,7 @@ select[multiple].input-lg {
 .form-horizontal .has-feedback .form-control-feedback {
   right: 15px;
 }
+*/
 @media (min-width: 768px) {
   .form-horizontal .form-group-lg .control-label {
     padding-top: 11px;
@@ -4976,6 +4977,15 @@ a.badge:focus {
 }
 .jumbotron > hr {
   border-top-color: #d5d5d5;
+}
+.colorTag{
+  color: white;
+  text-decoration:underline;
+}
+
+#login-form
+{
+  padding-top: 50px;
 }
 .container .jumbotron,
 .container-fluid .jumbotron {
