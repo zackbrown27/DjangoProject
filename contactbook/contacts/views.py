@@ -58,6 +58,41 @@ def loginProcess(request):
         return render(request, 'contacts/login.html', context)
     else:
         login(request)
+
+
+@login_required()
+def viewContactsByEmail(request):
+    cont = Contact.objects.order_by('email')
+    context = {'title': 'List of all Contacts',
+               'heading': "List of all Contacts",
+               'contacts_list': cont,
+               }
+    return render(request, 'contacts/contacts.html', context)
+@login_required()
+def viewContactsByPNumber(request):
+    cont = Contact.objects.order_by('phone')
+    context = {'title': 'List of all Contacts',
+               'heading': "List of all Contacts",
+               'contacts_list': cont,
+               }
+    return render(request, 'contacts/contacts.html', context)
+@login_required()
+def viewContactsByLName(request):
+    cont = Contact.objects.order_by('last_name')
+    context = {'title': 'List of all Contacts',
+               'heading': "List of all Contacts",
+               'contacts_list': cont,
+               }
+    return render(request, 'contacts/contacts.html', context)
+@login_required()
+def viewContactsByFName(request):
+    cont = Contact.objects.order_by('first_name')
+    context = {'title': 'List of all Contacts',
+               'heading': "List of all Contacts",
+               'contacts_list': cont,
+               }
+    return render(request, 'contacts/contacts.html', context)
+@login_required()
 def viewContacts(request):
 
     cont = Contact.objects.all()
@@ -66,7 +101,7 @@ def viewContacts(request):
                 'contacts_list': cont,
                }
     return render(request, 'contacts/contacts.html', context)
-
+@login_required()
 def saveContact(request, contact_id=None):
     errors = []
     if request.method == 'POST':
@@ -80,28 +115,34 @@ def saveContact(request, contact_id=None):
         if not request.POST.get('email', ''):
             errors.append('Enter Email')
 
+        if contact_id:
+            contact = Contact.objects.get(pk=contact_id)
+        else:
+            contact = Contact()
+        contact.first_name = request.POST.get('first_name')
+        contact.last_name = request.POST.get('last_name')
+        contact.phone = request.POST.get('phone')
+        contact.email = request.POST.get('email')
         data = {'heading': 'Thank You!',
                 'content': 'Your data has been saved!',
                 'errors': errors,
-            }
+                }
         if errors:
             data['heading'] = 'Add New Contact'
             data['content'] = 'Fill in the following information:'
             return render(request, 'contacts/edit_contact.html', data)
         else:
-            if contact_id:
-                contact = Contact.objects.get(pk=contact_id)
-            else:
-                contact = Contact()
             contact.first_name = request.POST.get('first_name')
             contact.last_name = request.POST.get('last_name')
-            contact.test1 = request.POST.get('phone')
-            contact.test2 = request.POST.get('email')
+            contact.phone = request.POST.get('phone')
+            contact.email = request.POST.get('email')
             contact.save()
-            data['heading'] = 'Success'
-            data['content'] = 'Contact edited successfully!'
-            data['contact'] = contact
-            return render(request, 'contacts/edit_contact.html', data)
+            contacts_list = Contact.objects.all()
+            content = {'update': 'Contact updated successfully',
+                       'contacts_list': contacts_list,
+                       'heading': 'LIST OF ALL CONTACTS'
+                        }
+            return render(request, 'contacts/contacts.html', content)
     else:
         if not contact_id:
             # must be a get method to enter new grade info so render the form for user to enter
@@ -113,8 +154,7 @@ def saveContact(request, contact_id=None):
             }
         else:
             # edit existing student
-            student = Contact.objects.get(pk=contact_id)
-            #student = get_object_or_404(Contact, pk=contact_id)
+            contact = Contact.objects.get(pk=contact_id)
             data = {
                 'heading': 'Edit Contact',
                 'content': 'Update the following information',
@@ -123,18 +163,11 @@ def saveContact(request, contact_id=None):
             }
 
         return render(request, 'contacts/edit_contact.html', data)
-
+@login_required(login_url='/login/')
 def deleteContact(request, contact_id):
-    contact = Contact.objects.get(pk=contact_id)
+    contact = get_object_or_404(Contact, pk=contact_id)
     contact.delete()
-    return viewContacts(request, "/contacts/contacts.html")
-def contactUs(request):
-    context = {
-        'heading': 'Address Book Contact Page',
-        'content': 'Ben Skogen- Phone Number: 555-555-5555',
-        'content2':  'Zack Brown- Phone Number: 999-999-9999'
-    }
-    return render(request, 'contacts/contactus.html', context)
+    return viewContacts(request)
 def logout_view(request):
     logout(request)
     context = {
@@ -143,3 +176,11 @@ def logout_view(request):
         'title': 'Logout Successful!'
     }
     return render(request, 'contacts/index.html', context)
+def contactUs(request):
+    context = {
+        'heading': 'Address Book Contact Page',
+        'content2': 'Ben Skogen- Phone Number: 555-555-5555',
+        'content':  'Zack Brown- Phone Number: 999-999-9999'
+    }
+    return render(request, 'contacts/contactus.html', context)
+

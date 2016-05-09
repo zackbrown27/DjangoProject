@@ -5,20 +5,31 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>{{heading}}</h2>
+                <td>{{ update }}</td>
                 <p><div id="main" style="height:200px;">
     {% if content %}
         <p> {{ content }} </p>
     {% endif %}
     {% if contacts_list %}
-        <table style="width:95%">
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th colspan="2">Tools</th>
-            </tr>
-            {% for contact in contacts_list %}
+        <div>
+        <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+    <tb>*You can sort your results by clicking the title of each tab</tb>
+	<!-- Table Header -->
+	<thead>
+		<tr>
+			<th><a href="/contactsbyfname/">First Name</a></th>
+			<th><a href="/contactsbylname/">Last Name</a></th>
+			<th><a href="/contactsbypnumber/">Phone Number</a></th>
+            <th><a href="/contactsbyemail/">Email</a></th>
+            <th colspan="2">Tools</th>
+		</tr>
+	</thead>
+	<!-- Table Header -->
+
+	<!-- Table Body -->
+	<tbody>
+
+		{% for contact in contacts_list %}
                 <tr>
                     <td>{{ contact.first_name  }}</td>
                     <td>{{ contact.last_name }}</td>
@@ -28,7 +39,12 @@
                     <td><a href="{% url 'delete' contact.id %}">Delete</a></td>
                 </tr>
             {% endfor %}
-        </table>
+
+	</tbody>
+	<!-- Table Body -->
+
+</table>
+        </div>
     {% else %}
         <p><strong>No contacts are available.</strong></p>
     {% endif %}
