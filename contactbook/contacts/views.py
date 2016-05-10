@@ -26,6 +26,87 @@ def login_view(request):
         'title': 'Login',
     }
     return render(request, 'contacts/login.html', context)
+@login_required()
+def searchProcessFName(request):
+    errors = []
+    if request.method == 'POST':
+        searchEntry = request.POST.get('searchEntry')
+    con = Contact.objects.filter(first_name__icontains=searchEntry)
+    if con.exists():
+        content = {
+            'heading': 'Results Found Successfully!',
+            'contacts_list': con
+        }
+    else:
+        con = Contact.objects.all()
+        content = {
+            'heading': 'LIST OF ALL CONTACTS',
+            'update': 'No contacts found using given search',
+            'contacts_list': con
+        }
+
+    return render(request, 'contacts/contacts.html', content)
+@login_required()
+def searchProcessLName(request):
+    errors = []
+    if request.method == 'POST':
+        searchEntry = request.POST.get('searchEntry')
+    con = Contact.objects.filter(last_name__icontains=searchEntry)
+    if con.exists():
+        content = {
+            'heading': 'Results Found Successfully!',
+            'contacts_list': con
+        }
+    else:
+        con = Contact.objects.all()
+        content = {
+            'heading': 'LIST OF ALL CONTACTS',
+            'update': 'No contacts found using given search',
+            'contacts_list': con
+        }
+
+    return render(request, 'contacts/contacts.html', content)
+@login_required()
+def searchProcessPNumber(request):
+    errors = []
+    if request.method == 'POST':
+        searchEntry = request.POST.get('searchEntry')
+    con = Contact.objects.filter(phone__icontains=searchEntry)
+    if con.exists():
+        content = {
+            'heading': 'Results Found Successfully!',
+            'contacts_list': con
+        }
+    else:
+        con = Contact.objects.all()
+        content = {
+            'heading': 'LIST OF ALL CONTACTS',
+            'update': 'No contacts found using given search',
+            'contacts_list': con
+        }
+
+    return render(request, 'contacts/contacts.html', content)
+@login_required()
+def searchProcessEmail(request):
+    errors = []
+    if request.method == 'POST':
+        searchEntry = request.POST.get('searchEntry')
+    con = Contact.objects.filter(email__icontains=searchEntry)
+    if con.exists():
+        content = {
+            'heading': 'Results Found Successfully!',
+            'contacts_list': con
+        }
+    else:
+        con = Contact.objects.all()
+        content = {
+            'heading': 'LIST OF ALL CONTACTS',
+            'update': 'No contacts found using given search',
+            'contacts_list': con
+        }
+
+    return render(request, 'contacts/contacts.html', content)
+
 
 def loginProcess(request):
     errors = []
@@ -59,7 +140,38 @@ def loginProcess(request):
     else:
         login(request)
 
-
+@login_required()
+def searchByFName(request):
+    context = {
+        'title': 'Enter First Name to Search',
+        'placeholder': 'FirstName',
+        'fname': "fname"
+    }
+    return render(request, 'contacts/searchcontact.html', context)
+@login_required()
+def searchByLName(request):
+    context = {
+        'title': 'Enter Last Name to Search',
+        'placeholder': 'LastName',
+        'lname': "lname"
+    }
+    return render(request, 'contacts/searchcontact.html', context)
+@login_required()
+def searchByPNumber(request):
+    context = {
+        'title': 'Enter Phone Number to Search',
+        'placeholder': 'PhoneNumber',
+        'pnumber': "pnumber"
+    }
+    return render(request, 'contacts/searchcontact.html', context)
+@login_required()
+def searchByEmail(request):
+    context = {
+        'title': 'Enter Email to Search',
+        'placeholder': 'Email',
+        'email': "email"
+    }
+    return render(request, 'contacts/searchcontact.html', context)
 @login_required()
 def viewContactsByEmail(request):
     cont = Contact.objects.order_by('email')

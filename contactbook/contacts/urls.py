@@ -14,10 +14,18 @@ urlpatterns = [
     url(r'^contactsbypnumber/', views.viewContactsByPNumber, name='contacts'),
     url(r'^contactsbyemail/', views.viewContactsByEmail, name='contacts'),
     url(r'^contact/([0-9]*)', views.saveContact, name='contact'),
+    url(r'^searchbyfname/', views.searchByFName, name='contact'),
+    url(r'^searchbylname/', views.searchByLName, name='contact'),
+    url(r'^searchbypnumber/', views.searchByPNumber, name='contact'),
+    url(r'^searchbyemail/', views.searchByEmail, name='contact'),
     url(r'^contactus/$', views.contactUs, name='contact'),
 	url(r'^delete/(?P<contact_id>[0-9]+)/$', views.deleteContact, name='delete'),
     url(r'^addcontact/', views.saveContact, name='add'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^loginProcess/$', views.loginProcess, name='loginProcess'),
+    url(r'^searchprocessfname/$', views.searchProcessFName, name='searchprocessfname'),
+    url(r'^searchprocesslname/$', views.searchProcessLName, name='searchprocesslname'),
+    url(r'^searchprocesspnumber/$', views.searchProcessPNumber, name='searchprocesspnumber'),
+    url(r'^searchprocessemail/$', views.searchProcessEmail, name='searchprocessemail'),
 
 ]

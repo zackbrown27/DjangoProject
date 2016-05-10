@@ -1,0 +1,46 @@
+{% include 'contacts/header.html' %}
+<!-- About Section -->
+<header class="intro">
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="container" style="max-width: 450px;">
+                {% if fname %}
+                    <form role="form" action="{% url 'searchprocessfname' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <h2 class="form-signin-heading">{{ title }}</h2>
+                        <label for=searchEntry class="sr-only">input</label>
+                        <input type="text" name=searchEntry id=searchEntry class="form-control" placeholder={{ placeholder }} required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+                {% elif lname %}
+                    <form role="form" action="{% url 'searchprocesslname' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <h2 class="form-signin-heading">{{ title }}</h2>
+                        <label for=searchEntry class="sr-only">input</label>
+                        <input type="text" name=searchEntry id=searchEntry class="form-control" placeholder={{ placeholder }} required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+                {% elif pnumber %}
+                    <form role="form" action="{% url 'searchprocesspnumber' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <h2 class="form-signin-heading">{{ title }}</h2>
+                        <label for=searchEntry class="sr-only">input</label>
+                        <input type="text" name=searchEntry id=searchEntry class="form-control" placeholder={{ placeholder }} required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+                {% elif email %}
+                    <form role="form" action="{% url 'searchprocessemail' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <h2 class="form-signin-heading">{{ title }}</h2>
+                        <label for=searchEntry class="sr-only">input</label>
+                        <input type="text" name=searchEntry id=searchEntry class="form-control" placeholder={{ placeholder }} required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+                <div>*Search results are not case sensitive. Searching "j" will return "John"</div>
+
+    </section>
+</header>
+{% include 'contacts/footer.html' %}
