@@ -1,13 +1,11 @@
-{% include 'contacts/header.html' %}
-<!-- About Section -->
-<header class="intro">
+{% extends 'contacts/base.html' %}
+{% block content %}
     <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>{{heading}}</h2>
-                <p>{{content}}</p>
+                <p>{{content | linebreaksbr}}</p>
             </div>
         </div>
     </section>
-</header>
-{% include 'contacts/footer.html' %}
+{% endblock %}

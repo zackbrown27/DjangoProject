@@ -1,59 +1,42 @@
+{% extends 'contacts/base.html' %}
 {% load humanize %}
-{% include 'contacts/header.html' %}
-<header class="intro">
+{% block content %}
     <section class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>{{heading}}</h2>
-                <td>{{ update }}</td>
-                <p><div id="main" style="height:200px;">
-    {% if content %}
-        <p> {{ content }} </p>
-    {% endif %}
-    {% if contacts_list %}
-        <div>
-        <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-    <tb>*You can sort your results by clicking the title of each tab</tb>
-	<!-- Table Header -->
-	<thead>
-		<tr>
-			<th><a href="/contactsbyfname/">First Name</a></th>
-			<th><a href="/contactsbylname/">Last Name</a></th>
-			<th><a href="/contactsbypnumber/">Phone Number</a></th>
-            <th><a href="/contactsbyemail/">Email</a></th>
-            <th colspan="2">Tools</th>
-		</tr>
-	</thead>
-	<!-- Table Header -->
-
-	<!-- Table Body -->
-	<tbody>
-
-		{% for contact in contacts_list %}
-                <tr>
-                    <td>{{ contact.first_name  }}</td>
-                    <td>{{ contact.last_name }}</td>
-                    <td>{{ contact.phone }}</td>
-                    <td>{{ contact.email }}</td>
-                    <td><a href="{% url 'contact' contact.id %}">Edit</a></td>
-                    <td><a href="{% url 'delete' contact.id %}">Delete</a></td>
-                </tr>
-            {% endfor %}
-
-	</tbody>
-	<!-- Table Body -->
-
-</table>
-        <div>
-            Search by: <a href="/searchbyfname/">First Name</a> | <a href="/searchbylname/">Last Name</a> | <a href="/searchbypnumber/">Phone Number</a> | <a href="/searchbyemail/">Email</a>
-        </div>
-    {% else %}
-        <p><strong>No contacts are available.</strong></p>
+        <h2>{{heading}}</h2>
+        <p>{{ update }}</p>
+        {% if content %}
+            <p> {{ content }} </p>
         {% endif %}
-    
-</div></p>
-            </div>
+        {% if contacts_list %}
+        <div>
+            <table class="table table-striped" style="width: 700px !important; margin: auto;">
+                <p style="display:inline">Search by: </p><a href="/searchbyfname/">First Name</a> | <a href="/searchbylname/">Last Name</a> | <a href="/searchbypnumber/">Phone Number</a> | <a href="/searchbyemail/">Email</a>
+                <thead>
+                    <tr>
+                        <th><a href="/contactsbyfname/">First Name</a></th>
+                        <th><a href="/contactsbylname/">Last Name</a></th>
+                        <th><a href="/contactsbypnumber/">Phone Number</a></th>
+                        <th><a href="/contactsbyemail/">Email</a></th>
+                        <th colspan="2">Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts_list %}
+                            <tr>
+                                <td>{{ contact.first_name  }}</td>
+                                <td>{{ contact.last_name }}</td>
+                                <td>{{ contact.phone }}</td>
+                                <td>{{ contact.email }}</td>
+                                <td><a href="{% url 'contact' contact.id %}">Edit</a></td>
+                                <td><a href="{% url 'delete' contact.id %}">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+
+            </table>
+        {% else %}
+            <p><strong>No contacts are available.</strong></p>
+        {% endif %}
         </div>
     </section>
-</header>
-{% include 'contacts/footer.html' %}
+{% endblock %}

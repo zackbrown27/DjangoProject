@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>Address Book Manager</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'contacts/img/favicon.png' %}"/>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'contacts/js/jquery.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script type="text/javascript" src="{% static 'contacts/js/jquery.easing.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="{% static 'contacts/js/bootstrap.min.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript" src="{% static 'contacts/js/grayscale.js' %}"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'contacts/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'contacts/css/grayscale.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'contacts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+{% include 'contacts/nav.html' %}
+<body class="intro">
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+{% include 'contacts/footer.html' %}
+</html>

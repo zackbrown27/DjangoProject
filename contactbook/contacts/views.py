@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from .models import Contact
 
@@ -11,18 +11,18 @@ def index(request):
     context = {
         'heading': 'Address Book',
         'title': 'An all-in-one address book manager',
-        'content': 'Created by Zack Brown & Ben Skogen.',
+        'content': 'Created by Zack Brown',
     }
     return render(request, 'contacts/index.html', context)
 def about(request):
     context = {
-        'heading': 'About Our Address Book'
-        'content' 'Address Book is a collaborative django-based web server \n allowing users to manage their contacts in an all-inclusive and easy to use package.'
+        'heading': 'About Our Address Book',
+        'content': 'Address Book is a django-based web server \n allowing users to manage their contacts in an \n all-inclusive and easy to use package.',
     }
     return render(request, 'contacts/about.html', context)
 def login_view(request):
     context = {
-        'heading': 'Login',
+        'heading': 'Please Sign In',
         'title': 'Login',
     }
     return render(request, 'contacts/login.html', context)
@@ -34,7 +34,7 @@ def searchProcessFName(request):
     con = Contact.objects.filter(first_name__icontains=searchEntry)
     if con.exists():
         content = {
-            'heading': 'Results Found Successfully!',
+            'heading': 'Returned results:',
             'contacts_list': con
         }
     else:
@@ -110,7 +110,6 @@ def searchProcessEmail(request):
 
 def loginProcess(request):
     errors = []
-    context = {}
     if request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
@@ -126,15 +125,16 @@ def loginProcess(request):
                     login(request, user)
                     context = {
                         'heading': 'Address Book',
-                        'title': 'An all-in-one address book manager',
-                        'content': 'Created by Zack Brown & Ben Skogen.',
+                        'content': 'Successfully logged in as ' + user.username
                     }
                     return render(request, 'contacts/index.html', context)
                 else:
                     errors.append('This account has been disabled.')
             else:
                 errors.append('Invalid username or password.')
-
+        context = {
+            'heading': 'Please Sign In',
+        }
         context['errors'] = errors
         return render(request, 'contacts/login.html', context)
     else:
@@ -291,7 +291,7 @@ def logout_view(request):
 def contactUs(request):
     context = {
         'heading': 'Address Book Contact Page',
-        'content2': 'Ben Skogen- Phone Number: 555-555-5555',
+        'content2': 'John Doe- Phone Number: 555-555-5555',
         'content':  'Zack Brown- Phone Number: 999-999-9999'
     }
     return render(request, 'contacts/contactus.html', context)
